@@ -89,7 +89,7 @@ const ProfileCard = () => {
           transition-all duration-700 cubic-bezier(0.4, 0, 0.2, 1)
           glass-panel-navy shadow-[0_-10px_40px_rgba(0,0,0,0.5)]
           flex flex-col
-          ${isExpanded ? 'h-[92vh] rounded-t-[40px]' : 'h-[45vh] md:h-[40vh] rounded-t-[30px]'}
+          ${isExpanded ? 'h-[92vh] rounded-t-[40px]' : 'h-[50vh] md:h-[40vh] rounded-t-[30px]'}
         `}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
