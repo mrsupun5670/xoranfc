@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { 
   FaFacebook, 
   FaInstagram, 
@@ -12,13 +13,23 @@ import {
   FaGraduationCap,
   FaCode
 } from 'react-icons/fa';
-import { profileData } from '../data/profileData';
-import bgImage from '../assets/IMG_1873.PNG';
+import { profiles } from '../data/profileData';
 
 const ProfileCard = () => {
+  const { username } = useParams();
+  const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const scrollRef = useRef(null);
   
+  const profileData = profiles[username?.toLowerCase()];
+
+  useEffect(() => {
+    if (!profileData) {
+      // Handle user not found - could redirect to default or show 404
+       navigate('/', { replace: true });
+    }
+  }, [username, profileData, navigate]);
+
   // Touch Handling State
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -48,9 +59,9 @@ const ProfileCard = () => {
     }
     
     if (isDownSwipe && isExpanded) {
-      if (scrollRef.current && scrollRef.current.scrollTop > 0) {
-        return;
-      }
+        if (scrollRef.current && scrollRef.current.scrollTop > 0) {
+          return;
+        }
       setIsExpanded(false); 
     }
   };
@@ -63,6 +74,8 @@ const ProfileCard = () => {
     tiktok: FaTiktok,
   };
 
+  if (!profileData) return null; // Or a loading spinner
+
   return (
     <div className={`relative w-full h-screen overflow-hidden bg-[#0F172A] text-white font-sans transition-all duration-1000 ${isExpanded ? 'bg-navy-900' : 'bg-black'}`}>
       
@@ -70,9 +83,9 @@ const ProfileCard = () => {
         1. BACKGROUND IMAGE 
       */}
       <div 
-        className="absolute inset-0 bg-cover bg-top bg-no-repeat transition-all duration-1000 ease-in-out"
+        className="absolute inset-0 bg-cover bg-top bg-no-repeat transition-[filter,transform] duration-1000 ease-in-out will-change-[filter,transform]"
         style={{ 
-          backgroundImage: `url(${bgImage})`,
+          backgroundImage: `url(${profileData.backgroundImage})`,
           filter: isExpanded 
             ? 'grayscale(0%) brightness(1.0) contrast(1.1)' 
             : 'grayscale(100%) brightness(0.7) contrast(1.2)',
@@ -91,9 +104,9 @@ const ProfileCard = () => {
         className={`
           absolute left-4 right-4 bottom-0 mx-auto
           md:max-w-2xl md:right-0 md:left-0 /* Desktop: Centered & wider */
-          transition-all duration-700 cubic-bezier(0.4, 0, 0.2, 1)
+          transition-[height,border-radius] duration-700 cubic-bezier(0.4, 0, 0.2, 1)
           glass-panel-navy shadow-[0_-10px_40px_rgba(0,0,0,0.5)]
-          flex flex-col
+          flex flex-col will-change-[height]
           ${isExpanded ? 'h-[97vh] rounded-t-[40px]' : 'h-[50vh] md:h-[40vh] rounded-t-[30px]'}
         `}
         onTouchStart={onTouchStart}
@@ -115,36 +128,34 @@ const ProfileCard = () => {
              {/* Name & Title */}
              <div className="mb-2">
                <h1 className="text-5xl md:text-6xl font-[800] text-white leading-[0.9] tracking-tight font-outfit">
-                 <span className="block">Dasun</span>
-                 <span className="block">Danushka</span>
+                 {profileData.name.split(' ').map((part, i) => (
+                    <span key={i} className="block">{part}</span>
+                 ))}
                </h1>
                <p className="text-blue-200 font-bold uppercase tracking-widest text-sm mt-3">
-                 Entrepreneur
+                 {profileData.title}
                </p>
              </div>
 
              {/* Social Icons - Moved to Top & Monochrome */}
              <div className="flex items-center gap-4 mt-1">
-                {/* Facebook */}
-                <a href={profileData.social.facebook} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
-                  <FaFacebook className="text-2xl text-white/90" />
-                </a>
-                {/* WhatsApp */}
-                <a href={profileData.social.whatsapp} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
-                  <FaWhatsapp className="text-2xl text-white/90" />
-                </a>
-                {/* YouTube */}
-                <a href={profileData.social.youtube} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
-                  <FaYoutube className="text-2xl text-white/90" />
-                </a>
-                {/* TikTok */}
-                <a href={profileData.social.tiktok} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
-                  <FaTiktok className="text-2xl text-white/90" />
-                </a>
+                {Object.entries(profileData.social).map(([platform, url]) => {
+                  if (!url) return null;
+                  const Icon = socialIcons[platform];
+                  if (!Icon) return null;
+                   
+                  return (
+                    <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
+                      <Icon className="text-2xl text-white/90" />
+                    </a>
+                  )
+                })}
                 {/* Email */}
-                <a href={`mailto:${profileData.email}`} className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
-                  <FaEnvelope className="text-2xl text-white/90" />
-                </a>
+                {profileData.email && (
+                  <a href={`mailto:${profileData.email}`} className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
+                    <FaEnvelope className="text-2xl text-white/90" />
+                  </a>
+                )}
              </div>
              
              {/* Swipe Hint */}
@@ -191,7 +202,8 @@ const ProfileCard = () => {
                  
                  {/* Tech Stack Pills - Compact */}
                  <div className="flex flex-wrap gap-1.5">
-                    {["Business Strategy", "Content Creation", "Social Media", "Tech Innovation"].map((skill) => (
+                    {/* Assuming skills are still a simple array, or update if checking against profileData.skills */}
+                    {profileData.skills && profileData.skills.slice(0, 4).map((skill) => (
                       <span key={skill} className="px-2.5 py-1 bg-white/5 text-blue-100/80 text-[10px] uppercase font-bold tracking-wide rounded-md border border-white/5">
                         {skill}
                       </span>

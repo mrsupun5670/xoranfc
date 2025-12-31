@@ -21,18 +21,18 @@
       rgba(15, 23, 42, 0.75) 100%
     );
     
-    /* Heavy Blur - Slightly reduced to help visibility through it */
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    /* Heavy Blur - Slightly reduced for performance */
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
     
     /* Strong Glass Borders */
     border-top: 1px solid rgba(255, 255, 255, 0.25);
     border-left: 1px solid rgba(255, 255, 255, 0.08);
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     
-    /* Simulate depth */
+    /* Simulate depth - refined shadow for performance */
     box-shadow: 
-      0 -10px 40px rgba(0,0,0,0.5),
+      0 -10px 20px rgba(0,0,0,0.5),
       inset 0 1px 0 rgba(255,255,255,0.15);
   }
 
