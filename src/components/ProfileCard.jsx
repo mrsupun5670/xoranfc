@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { 
   FaFacebook, 
   FaInstagram, 
@@ -17,6 +17,7 @@ import bgImage from '../assets/IMG_1873.PNG';
 
 const ProfileCard = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const scrollRef = useRef(null);
   
   // Touch Handling State
   const [touchStart, setTouchStart] = useState(null);
@@ -47,6 +48,9 @@ const ProfileCard = () => {
     }
     
     if (isDownSwipe && isExpanded) {
+      if (scrollRef.current && scrollRef.current.scrollTop > 0) {
+        return;
+      }
       setIsExpanded(false); 
     }
   };
@@ -112,7 +116,7 @@ const ProfileCard = () => {
              <div className="mb-2">
                <h1 className="text-5xl md:text-6xl font-[800] text-white leading-[0.9] tracking-tight font-outfit">
                  <span className="block">Dasun</span>
-                 <span className="block">Bandara</span>
+                 <span className="block">Danushka</span>
                </h1>
                <p className="text-blue-200 font-bold uppercase tracking-widest text-sm mt-3">
                  Entrepreneur
@@ -156,7 +160,9 @@ const ProfileCard = () => {
            flex-grow px-8 pb-8 overflow-y-auto no-scrollbar 
            transition-all duration-500 delay-100
            ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}
-        `}>
+        `}
+        ref={scrollRef}
+      >
            
            <div className="space-y-6 max-w-2xl mx-auto pt-4">
               
