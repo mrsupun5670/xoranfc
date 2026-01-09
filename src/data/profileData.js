@@ -102,6 +102,49 @@ export const profiles = {
     ]
   },
   
+  supun: {
+    name: "Supun Gunasinghe",
+    title: "Co-founder & Director at ZipZipy PVT LTD",
+    username: "@supun_io", // Placeholder handle
+    bio: "Software Engineer passionate about building scalable solutions.",
+    website: "https://zipzipy.com", // Assumed based on company name
+    
+    // Using placeholders - replace these!
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Supun", 
+    backgroundImage: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80", 
+    
+    stats: {
+      followers: "1.2K",
+      following: "50",
+      creations: "20"
+    },
+
+    email: "supun@zipzipy.com", // Placeholder
+    phone: "+94 7X XXX XXXX", // Placeholder
+    location: "Sri Lanka",
+    
+    social: {
+      facebook: "",
+      whatsapp: "",
+      youtube: "",
+      tiktok: "",
+      instagram: "",
+      linkedin: "",
+    },
+    
+    skills: [
+      "Software Engineering",
+      "Full Stack Development",
+      "Cloud Architecture",
+      "React",
+      "Node.js"
+    ],
+    
+    education: [],
+    experience: [],
+    gallery: []
+  },
+  
   /* 
   // ==========================================
   // TYPE NEW PROFILE DATA BELOW
