@@ -84,10 +84,12 @@ const ProfileCard = () => {
         1. BACKGROUND IMAGE 
       */}
       <div 
-        className="absolute inset-0 bg-cover bg-top bg-no-repeat transition-transform duration-1000 ease-in-out will-change-transform"
+        className="absolute inset-0 bg-cover bg-top bg-no-repeat transition-[filter,transform] duration-1000 ease-in-out will-change-[filter,transform]"
         style={{ 
           backgroundImage: `url(${profileData.backgroundImage})`,
-          // Filter removed for mobile performance
+          filter: isExpanded 
+            ? 'grayscale(0%) brightness(1.0) contrast(1.1)' 
+            : 'grayscale(100%) brightness(0.7) contrast(1.2)',
           transform: isExpanded ? 'scale(1.05)' : 'scale(1)'
         }}
       />
@@ -103,16 +105,21 @@ const ProfileCard = () => {
         className={`
           absolute left-4 right-4 bottom-0 mx-auto
           md:max-w-2xl md:right-0 md:left-0 /* Desktop: Centered & wider */
-          h-[96vh] /* Fixed height for performance */
+          h-[96dvh] /* Fixed height for performance, dvh handles mobile bars */
           transition-[transform,border-radius] duration-700 cubic-bezier(0.4, 0, 0.2, 1)
           glass-panel-navy shadow-[0_-10px_40px_rgba(0,0,0,0.5)]
           flex flex-col will-change-transform
           ${isExpanded ? 'translate-y-0 rounded-t-[40px]' : 'translate-y-[50vh] md:translate-y-[60vh] rounded-t-[30px]'}
         `}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
       >
+        
+        {/* SWIPE ZONE (Handle + Header) - Only this area triggers swipe actions now for better UX */}
+        <div 
+          className="flex-shrink-0 w-full"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
         
         {/* DRAG HANDLE AREA - Click to Toggle or Swipe */}
         <div 
