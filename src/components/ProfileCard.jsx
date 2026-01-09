@@ -138,7 +138,7 @@ const ProfileCard = () => {
              </div>
 
              {/* Social Icons - Moved to Top & Monochrome */}
-             <div className="flex items-center gap-4 mt-1">
+             <div className="flex items-center justify-center gap-4 mt-1">
                 {Object.entries(profileData.social).map(([platform, url]) => {
                   if (!url) return null;
                   const Icon = socialIcons[platform];
