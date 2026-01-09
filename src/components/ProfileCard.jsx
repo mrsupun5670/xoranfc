@@ -177,6 +177,7 @@ const ProfileCard = () => {
 
           </div>
         </div>
+        </div>
 
         {/* 
           HIDDEN CONTENT - SCROLLABLE 
