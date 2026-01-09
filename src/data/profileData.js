@@ -148,6 +148,9 @@ export const profiles = {
   /* 
   // ==========================================
   // TYPE NEW PROFILE DATA BELOW
+  // NAMING CONVENTION:
+  // 1. Use "firstname" (e.g., dasun)
+  // 2. If taken, use "firstname_surname" (e.g., dasun_bandara)
   // ==========================================
   
   username_here: {
