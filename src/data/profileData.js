@@ -4,7 +4,7 @@ export const profiles = {
   dasun: {
     // Profile Info
     name: "Dasun Danushka",
-    title: "Entrepreneur",
+    title: "Founder of Bimzo PVT LTD",
     username: "@dassa_technic",
     bio: "Tech enthusiast creating engaging content about technology and innovation. Sharing knowledge and helping people solve technical challenges through creative storytelling.",
     
