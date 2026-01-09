@@ -104,10 +104,11 @@ const ProfileCard = () => {
         className={`
           absolute left-4 right-4 bottom-0 mx-auto
           md:max-w-2xl md:right-0 md:left-0 /* Desktop: Centered & wider */
-          transition-[height,border-radius] duration-700 cubic-bezier(0.4, 0, 0.2, 1)
+          h-[96vh] /* Fixed height for performance */
+          transition-[transform,border-radius] duration-700 cubic-bezier(0.4, 0, 0.2, 1)
           glass-panel-navy shadow-[0_-10px_40px_rgba(0,0,0,0.5)]
-          flex flex-col will-change-[height]
-          ${isExpanded ? 'h-[97vh] rounded-t-[40px]' : 'h-[50vh] md:h-[40vh] rounded-t-[30px]'}
+          flex flex-col will-change-transform
+          ${isExpanded ? 'translate-y-0 rounded-t-[40px]' : 'translate-y-[50vh] md:translate-y-[60vh] rounded-t-[30px]'}
         `}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
