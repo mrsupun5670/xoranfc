@@ -88,6 +88,9 @@ export const profiles = {
       }
     ],
 
+    // Website
+    website: "https://bimzo.lk",
+
     // Skills
     skills: [
       "Technical Support",
@@ -98,5 +101,33 @@ export const profiles = {
       "Network Administration"
     ]
   },
-  // Add more profiles here with their username as the key
+  
+  /* 
+  // ==========================================
+  // TYPE NEW PROFILE DATA BELOW
+  // ==========================================
+  
+  username_here: {
+    name: "Client Name",
+    title: "Designation / Job Title",
+    username: "@social_handle",
+    bio: "Short bio or description goes here.",
+    website: "https://website.com",
+    
+    // Images (Put images in src/assets/profiles folder)
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ClientName",
+    backgroundImage: "https://images.unsplash.com/photo-1234...", // OR import from assets
+    
+    social: {
+      facebook: "",
+      whatsapp: "",
+      youtube: "",
+      tiktok: "",
+      instagram: "",
+      linkedin: "",
+    },
+    
+    // ... copy other sections as needed
+  },
+  */
 };

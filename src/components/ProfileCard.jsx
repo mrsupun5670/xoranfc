@@ -11,7 +11,8 @@ import {
   FaChevronUp,
   FaChevronDown,
   FaGraduationCap,
-  FaCode
+  FaCode,
+  FaGlobe
 } from 'react-icons/fa';
 import { profiles } from '../data/profileData';
 
@@ -155,6 +156,13 @@ const ProfileCard = () => {
                 {profileData.email && (
                   <a href={`mailto:${profileData.email}`} className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
                     <FaEnvelope className="text-2xl text-white/90" />
+                  </a>
+                )}
+
+                {/* Website */}
+                {profileData.website && (
+                  <a href={profileData.website} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
+                    <FaGlobe className="text-2xl text-white/90" />
                   </a>
                 )}
              </div>
