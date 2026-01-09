@@ -84,10 +84,14 @@ const ProfileCard = () => {
         1. BACKGROUND IMAGE 
       */}
       <div 
-        className="absolute inset-0 bg-cover bg-top bg-no-repeat transition-transform duration-1000 ease-in-out will-change-transform"
+        className={`absolute inset-0 bg-cover bg-top bg-no-repeat transition-all duration-1000 ease-in-out will-change-[filter,transform]
+          ${isExpanded 
+            ? 'grayscale-0 brightness-100 contrast-[1.1]' 
+            : 'grayscale brightness-[0.7] contrast-[1.2]'
+          }
+        `}
         style={{ 
           backgroundImage: `url(${profileData.backgroundImage})`,
-          // Filter removed for mobile performance
           transform: isExpanded ? 'scale(1.05)' : 'scale(1)'
         }}
       />
