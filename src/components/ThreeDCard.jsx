@@ -1,95 +1,87 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, Float, Text, RenderTexture, ContactShadows, RoundedBox } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Environment, Float, Html, ContactShadows, RoundedBox, Image, Text, GradientTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
 const BusinessCard = () => {
   const mesh = useRef(null);
   const [hovered, setHover] = useState(false);
 
-  // Auto-rotation (slower when hovered)
+  // Create a custom 2D rounded rectangle shape so we can extrude it.
+  // This prevents the "puffing up" thickness bug caused by RoundedBox's full 3D corner radius.
+  const cardShape = React.useMemo(() => {
+    const shape = new THREE.Shape();
+    const width = 3.2;
+    const height = 2.0;
+    const radius = 0.12; 
+    
+    // Starting from top left, drawing clockwise
+    shape.moveTo(-width/2 + radius, height/2);
+    shape.lineTo(width/2 - radius, height/2);
+    shape.quadraticCurveTo(width/2, height/2, width/2, height/2 - radius);
+    shape.lineTo(width/2, -height/2 + radius);
+    shape.quadraticCurveTo(width/2, -height/2, width/2 - radius, -height/2);
+    shape.lineTo(-width/2 + radius, -height/2);
+    shape.quadraticCurveTo(-width/2, -height/2, -width/2, -height/2 + radius);
+    shape.lineTo(-width/2, height/2 - radius);
+    shape.quadraticCurveTo(-width/2, height/2, -width/2 + radius, height/2);
+    return shape;
+  }, []);
+
+  // Minimal floating effect
   useFrame((state, delta) => {
-    if (mesh.current) {
-      mesh.current.rotation.y += delta * (hovered ? 0.2 : 0.5);
-    }
+    // We removed manual rotation here so it doesn't fight with user's manual dragging.
+    // The Float component provides the gentle up/down bobbing.
   });
 
   return (
     <Float floatIntensity={2} rotationIntensity={1} speed={1.5}>
       <group ref={mesh} onPointerOver={() => setHover(true)} onPointerOut={() => setHover(false)}>
-        
-        {/* CARD BODY - Rounded Box */}
-        <RoundedBox args={[3.2, 2.0, 0.05]} radius={0.1} smoothness={4} castShadow receiveShadow>
-            <meshStandardMaterial
-              roughness={0.2}
-              metalness={0.8}
-              color="#1e293b" // Slate-800
-            />
-        </RoundedBox>
-        
-        {/* FRONT FACE CONTENT */}
-        <mesh position={[0, 0, 0.026]}> {/* Slightly above surface (0.025) */}
-            <planeGeometry args={[3.1, 1.9]} />
-            <meshStandardMaterial transparent opacity={1} roughness={0.3} metalness={0.5}>
-                <RenderTexture attach="map">
-                    <color attach="background" args={['#000000']} />
-                    <group>
-                        {/* Logo / Banding */}
-                        <mesh position={[0, 0.8, -0.1]}>
-                            <planeGeometry args={[4, 1]} />
-                            <meshBasicMaterial color="#3b82f6" />
-                        </mesh>
-                        
-                        <Text fontSize={0.35} color="white" position={[0, 0.1, 0]} fontStyle="bold">
-                            DIGITAL IDENTITY
-                        </Text>
-                        <Text fontSize={0.12} color="#94a3b8" position={[0, -0.2, 0]} letterSpacing={0.15}>
-                            NEXT GEN NETWORKING
-                        </Text>
-                        
-                        <Text fontSize={0.1} color="#3b82f6" position={[0, -0.8, 0]} letterSpacing={0.05}>
-                            www.digitalidentity.com
-                        </Text>
-                    </group>
-                </RenderTexture>
-            </meshStandardMaterial>
+        {/* CARD BODY - Custom Extruded Shape to keep it fully flat (0.001) while having rounded X/Y corners */}
+        <mesh position={[0, 0, -0.0005]} castShadow receiveShadow>
+            <extrudeGeometry args={[cardShape, { depth: 0.001, bevelEnabled: false }]} />
+            <meshPhysicalMaterial roughness={0.15} metalness={0.85} clearcoat={1.0} clearcoatRoughness={0.05}>
+                <GradientTexture stops={[0, 1]} colors={['#7E1025', '#0E1A40']} />
+            </meshPhysicalMaterial>
         </mesh>
 
-        {/* BACK FACE CONTENT */}
-        <mesh position={[0, 0, -0.026]} rotation={[0, Math.PI, 0]}>
-             <planeGeometry args={[3.1, 1.9]} />
-             <meshStandardMaterial transparent opacity={1} roughness={0.3} metalness={0.5}>
-                <RenderTexture attach="map">
-                    <color attach="background" args={['#0f172a']} />
-                    
-                    {/* User Details (Left Side Now) */}
-                    <group position={[-0.8, 0, 0]}>
-                         <Text fontSize={0.25} color="white" position={[0, 0.2, 0]} anchorX="center" fontStyle="bold">
-                            Dasun Bandara
-                        </Text>
-                        <Text fontSize={0.12} color="#3b82f6" position={[0, -0.15, 0]} anchorX="center" letterSpacing={0.1}>
-                            CEO / FOUNDER
-                        </Text>
-                        <Text fontSize={0.09} color="#94a3b8" position={[0, -0.5, 0]} anchorX="center">
-                            +94 76 286 5688
-                        </Text>
-                    </group>
+        {/* FRONT CONTENT */}
+        <group position={[0, 0, 0.0006]}>
+            <Image url="/x-logo.png" position={[-1.1, 0.15, 0]} scale={[0.5, 0.5]} transparent />
+            
+            <Text fontSize={0.5} position={[-0.7, 0.15, 0]} anchorX="left" fontStyle="bold" letterSpacing={0.08}>
+                ORANFC
+                <meshPhysicalMaterial roughness={0.2} metalness={1} clearcoat={1} emissiveIntensity={0.2}>
+                    <GradientTexture stops={[0, 0.5, 1]} colors={['#fee715', '#d4af37', '#aa7d14']} />
+                </meshPhysicalMaterial>
+            </Text>
+            
+            <Text fontSize={0.08} position={[0, -0.65, 0]} letterSpacing={0.4} fontStyle="bold">
+                THE FUTURE OF NETWORKING
+                <meshStandardMaterial color="#8a8a8a" />
+            </Text>
+            
+            {/* Tap Here Icon (Bottom Right) */}
+            <Image url="/tap-icon.png" position={[1.3, -0.65, 0]} scale={[0.2, 0.2]} transparent />
+        </group>
 
-                    {/* QR Code (Right Side Now) */}
-                    <group position={[0.8, 0, 0]}>
-                        <mesh position={[0, 0, 0]}>
-                            <planeGeometry args={[1.0, 1.0]} />
-                            <meshBasicMaterial color="white" />
-                        </mesh>
-                        <mesh position={[0, 0, 0.01]}>
-                            <planeGeometry args={[0.85, 0.85]} />
-                            <meshBasicMaterial color="black" /> 
-                        </mesh>
-                    </group>
+        {/* BACK CONTENT */}
+        <group position={[0, 0, -0.0006]} rotation={[0, Math.PI, 0]}>
+            {/* User Details (Left Side) */}
+            <Text fontSize={0.2} position={[-0.8, 0.2, 0]} anchorX="center" fontStyle="bold" letterSpacing={0.1}>
+                XORANFC
+                <meshPhysicalMaterial roughness={0.2} metalness={1} clearcoat={1}>
+                     <GradientTexture stops={[0, 1]} colors={['#fee715', '#aa7d14']} />
+                </meshPhysicalMaterial>
+            </Text>
+            <Text fontSize={0.08} color="#ffffff" position={[-0.8, 0.0, 0]} anchorX="center" letterSpacing={0.1}>PREMIUM NFC BUSINESS CARDS</Text>
+            <Text fontSize={0.08} color="#94a3b8" position={[-0.8, -0.2, 0]} anchorX="center" fontStyle="bold">+94 76 286 5688</Text>
+            <Text fontSize={0.07} color="#d4af37" position={[-0.8, -0.35, 0]} anchorX="center" letterSpacing={0.05}>www.xoranfc.com</Text>
 
-                </RenderTexture>
-            </meshStandardMaterial>
-        </mesh>
+            {/* QR Code (Right Side) */}
+            <Image url="/qr-code.png" position={[0.75, 0.05, 0]} scale={[0.8, 0.8]} transparent />
+            <Text fontSize={0.12} color="#d4af37" position={[0.75, -0.5, 0]} anchorX="center" letterSpacing={0.15} fontStyle="bold">SCAN ME</Text>
+        </group>
 
       </group>
     </Float>
@@ -99,7 +91,11 @@ const BusinessCard = () => {
 const ThreeDCard = () => {
   return (
     <div className="w-full h-[400px] md:h-[500px]">
-      <Canvas shadows dpr={[1, 2]}>
+      <Canvas 
+        shadows 
+        dpr={[1, 2]}
+        style={{ touchAction: 'pan-y' }} // CRITICAL FIX: Allows native vertical scrolling over the canvas on mobile
+      >
         <PerspectiveCamera makeDefault position={[0, 0, 4]} fov={50} />
         
         {/* Lights */}
@@ -110,10 +106,18 @@ const ThreeDCard = () => {
         {/* Environment for reflections */}
         <Environment preset="city" />
 
-        <BusinessCard />
+        <Suspense fallback={null}>
+            <BusinessCard />
+        </Suspense>
         
         <ContactShadows position={[0, -1.5, 0]} opacity={0.4} scale={10} blur={2.5} far={4} />
-        <OrbitControls enableZoom={false} autoRotate={false} />
+        <OrbitControls 
+            enableZoom={false} 
+            enablePan={false}
+            autoRotate={true}
+            autoRotateSpeed={2.0} // Smooth, automatic spinning
+            makeDefault 
+        />
       </Canvas>
     </div>
   );

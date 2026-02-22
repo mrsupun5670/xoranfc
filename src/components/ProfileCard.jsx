@@ -24,10 +24,98 @@ const ProfileCard = () => {
   
   const profileData = profiles[username?.toLowerCase()];
 
+  const themeStyles = {
+    navy: {
+      bgMain: 'bg-[#0F172A]',
+      bgExpanded: 'bg-navy-900',
+      bgCollapsed: 'bg-black',
+      overlayExpanded: 'bg-[#0F172A]/40',
+      glassPanel: 'glass-panel-navy',
+      titleSub: 'text-blue-200',
+      iconColor: 'text-white/90',
+      bioText: 'text-blue-50/80',
+      bioBorder: 'border-blue-500/30',
+      sectionTitle: 'text-blue-400/70',
+      cardBg: 'bg-navy-800/40',
+      cardHover: 'hover:bg-navy-800/60',
+      cardBorder: 'border-white/5',
+      cardSub: 'text-blue-200/60',
+      pillBg: 'bg-blue-500/10',
+      pillText: 'text-blue-300',
+      skillBg: 'bg-white/5',
+      skillText: 'text-blue-100/80'
+    },
+    gold: {
+      bgMain: 'bg-[#1A1814]',
+      bgExpanded: 'bg-zinc-900',
+      bgCollapsed: 'bg-black',
+      overlayExpanded: 'bg-[#1A1814]/60',
+      glassPanel: 'glass-panel-gold',
+      titleSub: 'text-yellow-500',
+      iconColor: 'text-yellow-100',
+      bioText: 'text-yellow-50/90',
+      bioBorder: 'border-yellow-500/30',
+      sectionTitle: 'text-yellow-600/80',
+      cardBg: 'bg-zinc-800/50',
+      cardHover: 'hover:bg-zinc-800/70',
+      cardBorder: 'border-yellow-500/20',
+      cardSub: 'text-yellow-200/60',
+      pillBg: 'bg-yellow-500/20',
+      pillText: 'text-yellow-300',
+      skillBg: 'bg-yellow-500/10',
+      skillText: 'text-yellow-200/90'
+    },
+    magenta: {
+      bgMain: 'bg-[#4a0928]',
+      bgExpanded: 'bg-[#2d0518]',
+      bgCollapsed: 'bg-[#1a030e]',
+      overlayExpanded: 'bg-[#2d0518]/60',
+      glassPanel: 'glass-panel-magenta',
+      titleSub: 'text-pink-400',
+      iconColor: 'text-pink-100',
+      bioText: 'text-pink-50/90',
+      bioBorder: 'border-pink-500/30',
+      sectionTitle: 'text-pink-500/80',
+      cardBg: 'bg-[#3b0720]/50',
+      cardHover: 'hover:bg-[#3b0720]/70',
+      cardBorder: 'border-pink-500/20',
+      cardSub: 'text-pink-200/60',
+      pillBg: 'bg-pink-500/20',
+      pillText: 'text-pink-300',
+      skillBg: 'bg-pink-500/10',
+      skillText: 'text-pink-200/90'
+    },
+    dragon: {
+      bgMain: 'bg-[#0f121a]',
+      bgExpanded: 'bg-[#0b0d14]',
+      bgCollapsed: 'bg-black',
+      overlayExpanded: 'bg-[#0b0d14]/70',
+      glassPanel: 'glass-panel-dragon',
+      titleSub: 'text-red-500',
+      iconColor: 'text-white/90',
+      bioText: 'text-blue-50/90',
+      bioBorder: 'border-red-600/40',
+      sectionTitle: 'text-blue-400/80',
+      cardBg: 'bg-blue-900/10',
+      cardHover: 'hover:bg-blue-900/30',
+      cardBorder: 'border-blue-600/20',
+      cardSub: 'text-blue-200/60',
+      pillBg: 'bg-red-600/20',
+      pillText: 'text-red-300',
+      skillBg: 'bg-blue-600/10',
+      skillText: 'text-blue-200/90'
+    }
+  };
+
+  const currentTheme = themeStyles[profileData?.theme] || themeStyles.navy;
+
   useEffect(() => {
     if (!profileData) {
       // Handle user not found - could redirect to default or show 404
        navigate('/', { replace: true });
+    } else {
+      const firstName = profileData.name.split(' ')[0];
+      document.title = `Xoranfc - ${firstName}`;
     }
   }, [username, profileData, navigate]);
 
@@ -78,14 +166,15 @@ const ProfileCard = () => {
   if (!profileData) return null; // Or a loading spinner
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden bg-[#0F172A] text-white font-sans transition-all duration-1000 ${isExpanded ? 'bg-navy-900' : 'bg-black'}`}>
+    <div className={`relative w-full h-screen overflow-hidden ${currentTheme.bgMain} text-white font-sans transition-all duration-1000 ${isExpanded ? currentTheme.bgExpanded : currentTheme.bgCollapsed}`}>
       
       {/* 
         1. BACKGROUND IMAGE 
       */}
       <img 
         src={profileData.backgroundImage}
-        alt=""
+        alt="Profile Background"
+        fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 ease-in-out will-change-[filter,transform]"
         style={{ 
           filter: isExpanded 
@@ -96,7 +185,7 @@ const ProfileCard = () => {
       />
       
       {/* Overlay */}
-      <div className={`absolute inset-0 transition-opacity duration-1000 ${isExpanded ? 'bg-[#0F172A]/40' : 'bg-black/20'}`} />
+      <div className={`absolute inset-0 transition-opacity duration-1000 ${isExpanded ? currentTheme.overlayExpanded : 'bg-black/20'}`} />
 
       {/* 
         2. EXPANDABLE GLASS PANEL 
@@ -108,7 +197,7 @@ const ProfileCard = () => {
           md:max-w-2xl md:right-0 md:left-0 /* Desktop: Centered & wider */
           h-[96dvh] /* Fixed height for performance, dvh handles mobile bars */
           transition-[transform,border-radius] duration-700 cubic-bezier(0.4, 0, 0.2, 1)
-          glass-panel-navy shadow-[0_-10px_40px_rgba(0,0,0,0.5)]
+          ${currentTheme.glassPanel} shadow-[0_-10px_40px_rgba(0,0,0,0.5)]
           flex flex-col will-change-transform
           ${isExpanded ? 'translate-y-0 rounded-t-[40px]' : 'translate-y-[50vh] md:translate-y-[60vh] rounded-t-[30px]'}
         `}
@@ -140,13 +229,13 @@ const ProfileCard = () => {
                     <span key={i} className="block">{part}</span>
                  ))}
                </h1>
-               <p className="text-blue-200 font-bold uppercase tracking-widest text-sm mt-3">
+               <p className={`${currentTheme.titleSub} font-bold uppercase tracking-widest text-sm mt-3`}>
                  {profileData.title}
                </p>
              </div>
 
              {/* Social Icons - Moved to Top & Monochrome */}
-             <div className="flex items-center justify-center gap-4 mt-1">
+             <div className="flex flex-wrap items-center justify-center gap-3 mt-1 max-w-full">
                 {Object.entries(profileData.social).map(([platform, url]) => {
                   if (!url) return null;
                   const Icon = socialIcons[platform];
@@ -154,21 +243,21 @@ const ProfileCard = () => {
                    
                   return (
                     <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
-                      <Icon className="text-2xl text-white/90" />
+                      <Icon className={`text-2xl ${currentTheme.iconColor}`} />
                     </a>
                   )
                 })}
                 {/* Email */}
                 {profileData.email && (
                   <a href={`mailto:${profileData.email}`} className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
-                    <FaEnvelope className="text-2xl text-white/90" />
+                    <FaEnvelope className={`text-2xl ${currentTheme.iconColor}`} />
                   </a>
                 )}
 
                 {/* Website */}
                 {profileData.website && (
                   <a href={profileData.website} target="_blank" rel="noopener noreferrer" className="bg-white/10 p-2 rounded-full hover:scale-110 transition-transform">
-                    <FaGlobe className="text-2xl text-white/90" />
+                    <FaGlobe className={`text-2xl ${currentTheme.iconColor}`} />
                   </a>
                 )}
              </div>
@@ -194,22 +283,22 @@ const ProfileCard = () => {
            <div className="space-y-6 max-w-2xl mx-auto pt-4">
               
               {/* COMPACT BIO */}
-              <p className="text-base md:text-lg text-blue-50/80 leading-relaxed font-light border-l-2 border-blue-500/30 pl-4">
+              <p className={`text-base md:text-lg ${currentTheme.bioText} leading-relaxed font-light border-l-2 ${currentTheme.bioBorder} pl-4`}>
                  {profileData.bio}
               </p>
 
               {/* COMPACT EDUCATION & TECH */}
               <div className="space-y-4">
-                 <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400/70">Education & Tech</h3>
+                 <h3 className={`text-xs font-bold uppercase tracking-[0.2em] ${currentTheme.sectionTitle}`}>Education & Tech</h3>
 
                  <div className="grid gap-3">
                    {profileData.education && profileData.education.map((edu, idx) => (
-                     <div key={idx} className="bg-navy-800/40 p-3 rounded-lg border border-white/5 flex justify-between items-center hover:bg-navy-800/60 transition-colors">
+                     <div key={idx} className={`${currentTheme.cardBg} p-3 rounded-lg border ${currentTheme.cardBorder} flex justify-between items-center ${currentTheme.cardHover} transition-colors`}>
                         <div>
                            <h4 className="font-semibold text-white text-sm">{edu.degree}</h4>
-                           <p className="text-blue-200/60 text-xs">{edu.institution}</p>
+                           <p className={`${currentTheme.cardSub} text-xs`}>{edu.institution}</p>
                         </div>
-                        <span className="text-[10px] font-mono bg-blue-500/10 text-blue-300 px-2 py-0.5 rounded">
+                        <span className={`text-[10px] font-mono ${currentTheme.pillBg} ${currentTheme.pillText} px-2 py-0.5 rounded`}>
                           {edu.year}
                         </span>
                      </div>
@@ -220,7 +309,7 @@ const ProfileCard = () => {
                  <div className="flex flex-wrap gap-1.5">
                     {/* Assuming skills are still a simple array, or update if checking against profileData.skills */}
                     {profileData.skills && profileData.skills.slice(0, 4).map((skill) => (
-                      <span key={skill} className="px-2.5 py-1 bg-white/5 text-blue-100/80 text-[10px] uppercase font-bold tracking-wide rounded-md border border-white/5">
+                      <span key={skill} className={`px-2.5 py-1 ${currentTheme.skillBg} ${currentTheme.skillText} text-[10px] uppercase font-bold tracking-wide rounded-md border ${currentTheme.cardBorder}`}>
                         {skill}
                       </span>
                     ))}

@@ -1,4 +1,5 @@
 import dasunBg from '../assets/profiles/IMG_1873.PNG';
+import gaweshBg from '../assets/profiles/gawesh.jpeg';
 
 export const profiles = {
   dasun: {
@@ -141,6 +142,56 @@ export const profiles = {
     ],
     
     education: [],
+    experience: [],
+    gallery: []
+  },
+  
+  gawesh: {
+    name: "Gawesh Shashintha",
+    title: "Founder of Gold Dragon",
+    username: "@mr.gaiyaaa",
+    bio: "Trading strategist and digital entrepreneur creating impactful content around financial markets, smart money concepts, and wealth-building strategies. I share high-quality trading signals, market insights, and practical knowledge to help individuals grow with discipline and confidence. Through creative storytelling and powerful social media content, I aim to educate, inspire, and build a strong community focused on financial freedom and smart investing.",
+    website: "https://youtube.com/@mr.gaiyaaa?si=0cFVmlPsvTyS-Vch", 
+    
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Gawesh&backgroundColor=e30b0b",
+    backgroundImage: gaweshBg, 
+    
+    theme: "dragon",
+
+    stats: {
+      followers: "50K+",
+      following: "120",
+      creations: "300+"
+    },
+
+    email: "gawesh30shashintha@gmail.com",
+    phone: "+94 72 293 5753",
+    location: "Sri Lanka",
+    
+    social: {
+      facebook: "https://www.facebook.com/share/17EVx5LhHb/?mibextid=wwXIfr",
+      whatsapp: "https://wa.me/94722935753", 
+      youtube: "https://youtube.com/@gaiyafx?si=YYAegS9zHILSxjRs",
+      tiktok: "https://www.tiktok.com/@gaiya_forex_0?_r=1&_t=ZS-943TLPzSHkS",
+      instagram: "https://www.instagram.com/gawess_?igsh=MTZ4bmNybjU3ZWkyZg==",
+      linkedin: "",
+    },
+    
+    skills: [
+      "Financial Markets",
+      "Smart Money Concepts",
+      "Trading Signals",
+      "Wealth-building",
+      "Content Creation"
+    ],
+    
+    education: [
+      {
+        degree: "Bachelor (Hons) Technology Management",
+        institution: "NSBM Green University",
+        year: "2022 - Present"
+      }
+    ],
     experience: [],
     gallery: []
   },
