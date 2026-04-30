@@ -9,7 +9,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
-          icons: ['react-icons']
+          icons: ['react-icons'],
+          webgl: ['three', '@react-three/fiber', '@react-three/drei']
         }
       }
     }

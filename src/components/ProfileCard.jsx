@@ -86,24 +86,44 @@ const ProfileCard = () => {
       skillText: 'text-pink-200/90'
     },
     dragon: {
-      bgMain: 'bg-[#0f121a]',
-      bgExpanded: 'bg-[#0b0d14]',
+      bgMain: 'bg-[#0a0a0a]',
+      bgExpanded: 'bg-[#111111]',
       bgCollapsed: 'bg-black',
-      overlayExpanded: 'bg-[#0b0d14]/70',
+      overlayExpanded: 'bg-[#111111]/80',
       glassPanel: 'glass-panel-dragon',
-      titleSub: 'text-red-500',
-      iconColor: 'text-white/90',
-      bioText: 'text-blue-50/90',
-      bioBorder: 'border-red-600/40',
-      sectionTitle: 'text-blue-400/80',
-      cardBg: 'bg-blue-900/10',
-      cardHover: 'hover:bg-blue-900/30',
-      cardBorder: 'border-blue-600/20',
-      cardSub: 'text-blue-200/60',
-      pillBg: 'bg-red-600/20',
-      pillText: 'text-red-300',
-      skillBg: 'bg-blue-600/10',
-      skillText: 'text-blue-200/90'
+      titleSub: 'text-orange-500',
+      iconColor: 'text-orange-100/90',
+      bioText: 'text-orange-50/90',
+      bioBorder: 'border-orange-600/40',
+      sectionTitle: 'text-orange-400/80',
+      cardBg: 'bg-orange-900/10',
+      cardHover: 'hover:bg-orange-900/30',
+      cardBorder: 'border-orange-600/20',
+      cardSub: 'text-orange-200/60',
+      pillBg: 'bg-orange-700/20',
+      pillText: 'text-orange-300',
+      skillBg: 'bg-orange-600/10',
+      skillText: 'text-orange-200/90'
+    },
+    purple: {
+      bgMain: 'bg-[#1e102b]',
+      bgExpanded: 'bg-[#150a1e]',
+      bgCollapsed: 'bg-black',
+      overlayExpanded: 'bg-[#150a1e]/70',
+      glassPanel: 'glass-panel-purple',
+      titleSub: 'text-purple-400',
+      iconColor: 'text-purple-100',
+      bioText: 'text-purple-50/90',
+      bioBorder: 'border-purple-500/40',
+      sectionTitle: 'text-purple-400/80',
+      cardBg: 'bg-purple-900/20',
+      cardHover: 'hover:bg-purple-900/40',
+      cardBorder: 'border-purple-600/30',
+      cardSub: 'text-purple-200/70',
+      pillBg: 'bg-purple-600/30',
+      pillText: 'text-purple-200',
+      skillBg: 'bg-indigo-600/20',
+      skillText: 'text-indigo-200/90'
     }
   };
 
@@ -175,7 +195,7 @@ const ProfileCard = () => {
         src={profileData.backgroundImage}
         alt="Profile Background"
         fetchPriority="high"
-        className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 ease-in-out will-change-[filter,transform]"
+        className={`absolute inset-0 w-full h-full object-cover ${profileData.imagePosition || 'object-top'} transition-all duration-1000 ease-in-out will-change-[filter,transform]`}
         style={{ 
           filter: isExpanded 
             ? 'grayscale(0%) brightness(1.0) contrast(1.1)' 

@@ -68,21 +68,38 @@
       inset 0 1px 0 rgba(236, 72, 153, 0.15);
   }
 
-  /* DRAGON (RED/BLUE) STYLE GLASS PANEL */
+  /* DRAGON (BLACK/ORANGE/RED) STYLE GLASS PANEL */
   .glass-panel-dragon {
     background: linear-gradient(
       135deg, 
-      rgba(227, 11, 11, 0.25) 0%, 
-      rgba(11, 26, 92, 0.4) 100%
+      rgba(255, 69, 0, 0.25) 0%, 
+      rgba(20, 10, 5, 0.6) 100%
     );
     backdrop-filter: blur(8px) saturate(160%);
     -webkit-backdrop-filter: blur(8px) saturate(160%);
-    border-top: 1px solid rgba(227, 11, 11, 0.3);
-    border-left: 1px solid rgba(227, 11, 11, 0.1);
-    border-right: 1px solid rgba(11, 26, 92, 0.2);
+    border-top: 1px solid rgba(255, 69, 0, 0.3);
+    border-left: 1px solid rgba(255, 69, 0, 0.15);
+    border-right: 1px solid rgba(255, 69, 0, 0.05);
     box-shadow: 
-      0 -10px 30px rgba(0,0,0,0.6),
-      inset 0 1px 0 rgba(227, 11, 11, 0.15);
+      0 -10px 30px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(255, 69, 0, 0.2);
+  }
+
+  /* PURPLE STYLE GLASS PANEL */
+  .glass-panel-purple {
+    background: linear-gradient(
+      180deg, 
+      rgba(88, 28, 135, 0.4) 0%, 
+      rgba(46, 16, 101, 0.85) 100%
+    );
+    backdrop-filter: blur(8px) saturate(160%);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    border-top: 1px solid rgba(168, 85, 247, 0.25);
+    border-left: 1px solid rgba(168, 85, 247, 0.08);
+    border-right: 1px solid rgba(168, 85, 247, 0.08);
+    box-shadow: 
+      0 -10px 20px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(168, 85, 247, 0.15);
   }
 
   /* BUTTON STYLES within Navy Theme */

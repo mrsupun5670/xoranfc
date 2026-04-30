@@ -46,7 +46,7 @@ const Home = () => {
         {/* HEADER / LOGO BAR */}
         <header className="absolute top-0 left-0 w-full p-6 md:p-10 z-50 flex items-center">
             <img src="/x-logo.png" alt="X Logo" className="w-10 h-10 mr-3 object-contain drop-shadow-lg" />
-            <h1 className="text-2xl font-black tracking-widest bg-gradient-to-br from-[#fee715] via-[#d4af37] to-[#aa7d14] text-transparent bg-clip-text drop-shadow-md">
+            <h1 className="text-2xl font-black tracking-widest bg-gradient-to-br from-white via-[#cbd5e1] to-[#94a3b8] text-transparent bg-clip-text drop-shadow-md">
                 ORANFC
             </h1>
         </header>
@@ -60,14 +60,14 @@ const Home = () => {
 
             {/* LEFT CONTENT */}
             <div className="md:w-1/2 z-10 text-center md:text-left pt-10 md:pt-0">
-                 <div className="inline-block px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 mb-6 backdrop-blur-md">
-                    <span className="text-[#d4af37] text-xs font-bold tracking-[0.2em] uppercase">The Future of Networking</span>
+                 <div className="inline-block px-4 py-1.5 rounded-full bg-[#cbd5e1]/10 border border-[#cbd5e1]/20 mb-6 backdrop-blur-md">
+                    <span className="text-[#cbd5e1] text-xs font-bold tracking-[0.2em] uppercase">The Future of Networking</span>
                  </div>
                 
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-[800] font-outfit tracking-tighter leading-[0.9] mb-6">
                     <span className="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">Premium</span>
                     <br />
-                    <span className="bg-gradient-to-r from-[#fee715] to-[#aa7d14] bg-clip-text text-transparent">Identity</span>
+                    <span className="bg-gradient-to-r from-[#cbd5e1] to-[#64748b] bg-clip-text text-transparent">Identity</span>
                 </h1>
                 
                 <p className="text-lg md:text-xl text-slate-300/80 mb-8 max-w-lg mx-auto md:mx-0 font-light leading-relaxed">
@@ -76,12 +76,12 @@ const Home = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <button className="px-8 py-4 bg-gradient-to-r from-[#fee715] to-[#aa7d14] text-black font-bold rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    <button className="px-8 py-4 bg-gradient-to-r from-[#7E1025] to-[#5a0b1a] text-white font-bold rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(126,16,37,0.4)] border border-[#7E1025]/50 outline-none">
                         Get Your Card
                     </button>
-                    <button className="px-8 py-4 bg-white/5 border border-white/10 text-white font-semibold rounded-full hover:bg-white/10 transition-colors backdrop-blur-sm">
+                    <Link to="/demo" className="px-8 py-4 bg-white/5 border border-white/10 text-white font-semibold rounded-full hover:bg-white/10 transition-colors backdrop-blur-sm text-center">
                         View Demo Profile
-                    </button>
+                    </Link>
                 </div>
             </div>
 
@@ -97,18 +97,18 @@ const Home = () => {
         <section className="py-24 px-6 md:px-20 bg-black/20 backdrop-blur-sm relative z-10">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold font-outfit mb-4">Premium <span className="text-[#d4af37]">Technology</span></h2>
+                    <h2 className="text-3xl md:text-5xl font-bold font-outfit mb-4">Premium <span className="text-[#cbd5e1]">Technology</span></h2>
                     <p className="text-white/50 max-w-2xl mx-auto">Crafted with precision, embedded with innovation. Our cards are designed to leave a lasting impression.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <FeatureCard 
-                        icon={<FaWifi className="text-3xl text-emerald-400" />}
+                        icon={<FaWifi className="text-3xl text-[#cbd5e1]" />}
                         title="NFC Embedded"
                         desc="Instant sharing with a simple tap on any compatible smartphone."
                     />
                     <FeatureCard 
-                        icon={<FaQrcode className="text-3xl text-[#d4af37]" />}
+                        icon={<FaQrcode className="text-3xl text-white" />}
                         title="Dynamic QR"
                         desc="Update your details anytime without printing a new card."
                     />
@@ -132,7 +132,7 @@ const Home = () => {
                 
                 {/* Text Content */}
                 <div className="md:w-1/2 text-center md:text-left">
-                    <h2 className="text-3xl md:text-5xl font-bold font-outfit mb-6">Perfectly <span className="text-[#d4af37]">Sized</span></h2>
+                    <h2 className="text-3xl md:text-5xl font-bold font-outfit mb-6">Perfectly <span className="text-[#cbd5e1]">Sized</span></h2>
                     <p className="text-slate-300/80 text-lg leading-relaxed mb-6">
                         Our premium NFC cards are crafted to the exact dimensions of a standard high-end credit card (CR80 standard). 
                         Designed to fit perfectly in any wallet, cardholder, or pocket while maintaining maximum durability.
@@ -151,28 +151,28 @@ const Home = () => {
                 </div>
 
                 {/* Diagram */}
-                <div className="md:w-1/2 flex justify-center w-full">
-                    <div className="relative group">
+                <div className="md:w-1/2 flex justify-center w-full px-4 md:px-0 mt-10 md:mt-0">
+                    <div className="relative w-full max-w-[340px]">
                         {/* The Diagram Box */}
-                        <div className="w-[340px] h-[215px] border-2 border-dashed border-[#d4af37]/50 rounded-2xl relative flex items-center justify-center bg-[#0F172A]/50 backdrop-blur-sm">
-                            <span className="text-[#d4af37]/30 text-8xl font-black">CR80</span>
+                        <div className="w-full aspect-[1.58] border-2 border-dashed border-[#64748b]/50 rounded-2xl relative flex items-center justify-center bg-[#0F172A]/50 backdrop-blur-sm">
+                            <span className="text-[#64748b]/20 text-6xl md:text-8xl font-black">CR80</span>
                             
                             {/* Width Label (Top) */}
-                            <div className="absolute -top-10 left-0 w-full flex items-center justify-between text-[#d4af37] font-mono text-sm">
-                                <span className="w-2 h-2 border-l-2 border-t-2 border-[#d4af37]"></span>
-                                <div className="border-t border-[#d4af37] w-full mx-2 flex-grow relative">
-                                    <span className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-[#0a1120] px-2">85.60 mm</span>
+                            <div className="absolute -top-10 left-0 w-full flex items-center justify-between text-[#cbd5e1] font-mono text-xs md:text-sm">
+                                <span className="w-2 h-2 border-l-2 border-t-2 border-[#cbd5e1]"></span>
+                                <div className="border-t border-[#cbd5e1] w-full mx-2 flex-grow relative">
+                                    <span className="absolute -top-5 md:-top-6 left-1/2 transform -translate-x-1/2 bg-[#0a1120] px-2 whitespace-nowrap">85.60 mm</span>
                                 </div>
-                                <span className="w-2 h-2 border-r-2 border-t-2 border-[#d4af37]"></span>
+                                <span className="w-2 h-2 border-r-2 border-t-2 border-[#cbd5e1]"></span>
                             </div>
 
                             {/* Height Label (Right) */}
-                            <div className="absolute -right-12 top-0 h-full flex flex-col items-center justify-between text-[#d4af37] font-mono text-sm">
-                                <span className="w-2 h-2 border-t-2 border-r-2 border-[#d4af37]"></span>
-                                <div className="border-r border-[#d4af37] h-full my-2 flex-grow relative">
-                                     <span className="absolute top-1/2 left-4 transform -translate-y-1/2 whitespace-nowrap bg-[#0a1120] py-2">53.98 mm</span>
+                            <div className="absolute -right-8 md:-right-12 top-0 h-full flex flex-col items-center justify-between text-[#cbd5e1] font-mono text-xs md:text-sm">
+                                <span className="w-2 h-2 border-t-2 border-r-2 border-[#cbd5e1]"></span>
+                                <div className="border-r border-[#cbd5e1] h-full my-2 flex-grow relative">
+                                     <span className="absolute top-1/2 left-2 md:left-4 transform -translate-y-1/2 whitespace-nowrap bg-[#0a1120] py-1 md:py-2">53.98 mm</span>
                                 </div>
-                                <span className="w-2 h-2 border-b-2 border-r-2 border-[#d4af37]"></span>
+                                <span className="w-2 h-2 border-b-2 border-r-2 border-[#cbd5e1]"></span>
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@ const Home = () => {
                 
                 {/* Left Side: Text and Direct Contacts */}
                 <div className="lg:w-1/2 text-center lg:text-left">
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-outfit mb-6">Ready to Step into the <span className="text-[#d4af37]">Future?</span></h2>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-outfit mb-6">Ready to Step into the <span className="text-[#cbd5e1]">Future?</span></h2>
                     <p className="text-lg text-slate-300 md:text-xl mb-10 leading-relaxed">
                         Upgrade your networking game. Request your customized, premium Xoranfc business card today and leave a lasting impression on every client.
                     </p>
@@ -196,9 +196,9 @@ const Home = () => {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         <a 
                             href="mailto:sales@xoranfc.com" 
-                            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/20 hover:border-[#d4af37] hover:bg-[#d4af37]/10 rounded-full text-lg transition-all"
+                            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/20 hover:border-[#cbd5e1] hover:bg-white/10 rounded-full text-lg transition-all"
                         >
-                            <FaEnvelope className="text-[#d4af37]" />
+                            <FaEnvelope className="text-[#cbd5e1]" />
                             <span>sales@xoranfc.com</span>
                         </a>
                         <a 
@@ -217,7 +217,7 @@ const Home = () => {
                 <div className="lg:w-1/2 w-full max-w-lg">
                     <div className="bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
                         {/* Decorative Top Line */}
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#7E1025] via-[#d4af37] to-[#0E1A40]"></div>
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#7E1025] via-[#cbd5e1] to-[#0E1A40]"></div>
                         
                         <h3 className="text-2xl font-bold mb-6 font-outfit">Request bringing your card to life</h3>
                         
@@ -225,28 +225,28 @@ const Home = () => {
                             <div className="flex flex-col md:flex-row gap-5">
                                 <div className="flex-1">
                                     <label className="block text-sm text-slate-400 mb-2 font-medium">Your Name *</label>
-                                    <input required type="text" name="user_name" placeholder="John Doe" className="w-full bg-[#0a1120] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] transition-colors" />
+                                    <input required type="text" name="user_name" placeholder="John Doe" className="w-full bg-[#0a1120] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#cbd5e1] focus:ring-1 focus:ring-[#cbd5e1] transition-colors" />
                                 </div>
                                 <div className="flex-1">
                                     <label className="block text-sm text-slate-400 mb-2 font-medium">Business Name</label>
-                                    <input type="text" name="business_name" placeholder="Acme Corp" className="w-full bg-[#0a1120] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] transition-colors" />
+                                    <input type="text" name="business_name" placeholder="Acme Corp" className="w-full bg-[#0a1120] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#cbd5e1] focus:ring-1 focus:ring-[#cbd5e1] transition-colors" />
                                 </div>
                             </div>
                             
                             <div>
                                 <label className="block text-sm text-slate-400 mb-2 font-medium">Email Address *</label>
-                                <input required type="email" name="user_email" placeholder="john@example.com" className="w-full bg-[#0a1120] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] transition-colors" />
+                                <input required type="email" name="user_email" placeholder="john@example.com" className="w-full bg-[#0a1120] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#cbd5e1] focus:ring-1 focus:ring-[#cbd5e1] transition-colors" />
                             </div>
 
                             <div>
                                 <label className="block text-sm text-slate-400 mb-2 font-medium">Contact Number *</label>
-                                <input required type="tel" name="contact_number" placeholder="+1 (555) 000-0000" className="w-full bg-[#0a1120] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] transition-colors" />
+                                <input required type="tel" name="contact_number" placeholder="+1 (555) 000-0000" className="w-full bg-[#0a1120] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#cbd5e1] focus:ring-1 focus:ring-[#cbd5e1] transition-colors" />
                             </div>
 
                             <button 
                                 type="submit" 
                                 disabled={isSubmitting}
-                                className={`mt-2 w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-black transition-all ${isSubmitting ? 'bg-slate-400 cursor-not-allowed' : 'bg-gradient-to-r from-[#fee715] to-[#aa7d14] hover:scale-[1.02] shadow-[0_0_20px_rgba(212,175,55,0.2)]'}`}
+                                className={`mt-2 w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-white transition-all ${isSubmitting ? 'bg-slate-400 cursor-not-allowed' : 'bg-gradient-to-r from-[#7E1025] to-[#5a0b1a] hover:scale-[1.02] shadow-[0_0_20px_rgba(126,16,37,0.4)] border border-[#7E1025]/50'}`}
                             >
                                 {isSubmitting ? (
                                     <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin"></div>

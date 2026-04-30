@@ -51,8 +51,8 @@ const BusinessCard = () => {
             
             <Text fontSize={0.5} position={[-0.7, 0.15, 0]} anchorX="left" fontStyle="bold" letterSpacing={0.08}>
                 ORANFC
-                <meshPhysicalMaterial roughness={0.2} metalness={1} clearcoat={1} emissiveIntensity={0.2}>
-                    <GradientTexture stops={[0, 0.5, 1]} colors={['#fee715', '#d4af37', '#aa7d14']} />
+                <meshPhysicalMaterial roughness={0.1} metalness={1} clearcoat={1} emissiveIntensity={0.1}>
+                    <GradientTexture stops={[0, 0.5, 1]} colors={['#ffffff', '#cbd5e1', '#94a3b8']} />
                 </meshPhysicalMaterial>
             </Text>
             
@@ -70,17 +70,17 @@ const BusinessCard = () => {
             {/* User Details (Left Side) */}
             <Text fontSize={0.2} position={[-0.8, 0.2, 0]} anchorX="center" fontStyle="bold" letterSpacing={0.1}>
                 XORANFC
-                <meshPhysicalMaterial roughness={0.2} metalness={1} clearcoat={1}>
-                     <GradientTexture stops={[0, 1]} colors={['#fee715', '#aa7d14']} />
+                <meshPhysicalMaterial roughness={0.1} metalness={1} clearcoat={1}>
+                     <GradientTexture stops={[0, 1]} colors={['#ffffff', '#cbd5e1']} />
                 </meshPhysicalMaterial>
             </Text>
             <Text fontSize={0.08} color="#ffffff" position={[-0.8, 0.0, 0]} anchorX="center" letterSpacing={0.1}>PREMIUM NFC BUSINESS CARDS</Text>
             <Text fontSize={0.08} color="#94a3b8" position={[-0.8, -0.2, 0]} anchorX="center" fontStyle="bold">+94 76 286 5688</Text>
-            <Text fontSize={0.07} color="#d4af37" position={[-0.8, -0.35, 0]} anchorX="center" letterSpacing={0.05}>www.xoranfc.com</Text>
+            <Text fontSize={0.07} color="#cbd5e1" position={[-0.8, -0.35, 0]} anchorX="center" letterSpacing={0.05}>www.xoranfc.com</Text>
 
             {/* QR Code (Right Side) */}
             <Image url="/qr-code.png" position={[0.75, 0.05, 0]} scale={[0.8, 0.8]} transparent />
-            <Text fontSize={0.12} color="#d4af37" position={[0.75, -0.5, 0]} anchorX="center" letterSpacing={0.15} fontStyle="bold">SCAN ME</Text>
+            <Text fontSize={0.12} color="#cbd5e1" position={[0.75, -0.5, 0]} anchorX="center" letterSpacing={0.15} fontStyle="bold">SCAN ME</Text>
         </group>
 
       </group>
